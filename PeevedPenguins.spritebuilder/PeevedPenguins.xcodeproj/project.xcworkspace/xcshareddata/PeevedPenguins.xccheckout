@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9D711219-821B-470E-BB53-7078ECE56BC2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PeevedPenguins</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>73745E20-389A-41C3-9F8B-1AFFEF9F848D</key>
+		<string>https://github.com/nlintz/Software-Systems-Final-Project.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PeevedPenguins.spritebuilder/PeevedPenguins.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>73745E20-389A-41C3-9F8B-1AFFEF9F848D</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/nlintz/Software-Systems-Final-Project.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>73745E20-389A-41C3-9F8B-1AFFEF9F848D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>73745E20-389A-41C3-9F8B-1AFFEF9F848D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SoftSysFinal</string>
+		</dict>
+	</array>
+</dict>
+</plist>
