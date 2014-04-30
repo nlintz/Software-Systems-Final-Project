@@ -26,6 +26,7 @@
     CCNode *_contentNode;
     CCNode *_pullbackNode;
     CCNode *_mouseJointNode;
+    CCNode *_resetNode;
     Penguin *_currentPenguin;
     
     CCPhysicsJoint *_catapultJoint;
@@ -52,7 +53,7 @@ static const float MIN_SPEED = 5.f;
     
     _penguins = [[NSMutableArray alloc] init];
     
-    _physicsNode.debugDraw = TRUE;
+//    _physicsNode.debugDraw = TRUE;
     _physicsNode.collisionDelegate = self;
     
     
@@ -76,6 +77,7 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (void)nextLevel {
+    [self nextAttempt];
     [_levelNode removeChild:level];
     
     _currentLevelIndex = (_currentLevelIndex + 1) % NUM_LEVELS;
@@ -85,7 +87,6 @@ static const float MIN_SPEED = 5.f;
         [_physicsNode removeChild:penguin];
     }
     _penguins = [[NSMutableArray alloc] init];
-    [self nextAttempt];
     [_levelNode addChild:level];
     [_currentLevel addObserver:self forKeyPath:@"numSeals" options:0 context:NULL];
 }
@@ -114,10 +115,10 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (NSArray *)getLevels {
-    Level *level1 = [[Level alloc] initWithLevelName:@"Level1" numSeals:5];
-    Level *level2 = [[Level alloc] initWithLevelName:@"Level2" numSeals:8];
-    Level *level3 = [[Level alloc] initWithLevelName:@"Level3" numSeals:5];
-    return @[level1, level2, level3];
+    Level *level1 = [[Level alloc] initWithLevelName:@"Level1" numSeals:1];
+    Level *level2 = [[Level alloc] initWithLevelName:@"Level2" numSeals:1];
+    Level *level3 = [[Level alloc] initWithLevelName:@"Level3" numSeals:1];
+    return @[level1, level3, level2];
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair seal:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
@@ -192,7 +193,8 @@ static const float MIN_SPEED = 5.f;
     _currentPenguin = nil;
     [_contentNode stopAction:_followPenguin];
     
-    CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:1.0f position:ccp(0, 0)];
+    CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:1.0f position:_resetNode.position];
+    
     [_contentNode runAction:actionMoveTo];
 }
 
