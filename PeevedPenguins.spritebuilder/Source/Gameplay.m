@@ -10,13 +10,14 @@
 #import "Penguin.h"
 #import "Level.h"
 #import "Seal.h"
+#import "LevelOverScreen.h"
 
 @implementation Gameplay
 {
     NSInteger _currentLevelIndex;
     NSArray * _levels;
     Level *_currentLevel;
-    CCScene *level;
+    CCScene *_level;
     NSMutableArray *_penguins;
     
     CCPhysicsNode *_physicsNode;
@@ -47,8 +48,8 @@ static const float MIN_SPEED = 5.f;
     _levels = [self getLevels];
     _currentLevel = [_levels objectAtIndex:_currentLevelIndex];
     
-    level = [CCBReader loadAsScene:[NSString stringWithFormat:@"Levels/%@", [_currentLevel levelName]]];
-    [_levelNode addChild:level];
+    _level = [CCBReader loadAsScene:[NSString stringWithFormat:@"Levels/%@", [_currentLevel levelName]]];
+    [_levelNode addChild:_level];
     [_currentLevel addObserver:self forKeyPath:@"numSeals" options:0 context:NULL];
     
     _penguins = [[NSMutableArray alloc] init];
@@ -77,18 +78,38 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (void)nextLevel {
-    [self nextAttempt];
-    [_levelNode removeChild:level];
-    
+    [self resetLevel];
     _currentLevelIndex = (_currentLevelIndex + 1) % NUM_LEVELS;
     _currentLevel = [_levels objectAtIndex:_currentLevelIndex];
-    level = [CCBReader loadAsScene:[NSString stringWithFormat:@"Levels/%@", [_currentLevel levelName]]];
+    [self showNextLevelPopup];
+//    [self loadLevel:_currentLevel];
+}
+
+- (void)showNextLevelPopup {
+    LevelOverScreen *levelOver = (LevelOverScreen *)[CCBReader load:@"LevelOverScreen"];
+    levelOver.positionType = CCPositionTypeNormalized;
+    levelOver.position = ccp(0.45, 0.5);
+    levelOver.zOrder = INT_MAX;
+    levelOver.gamePlay = self;
+    [self addChild:levelOver];
+
+}
+
+- (void)loadLevel {
+    [_levelNode removeChild:_level];
+    _level = [CCBReader loadAsScene:[NSString stringWithFormat:@"Levels/%@", [_currentLevel levelName]]];
+    [_levelNode addChild:_level];
+    [_currentLevel addObserver:self forKeyPath:@"numSeals" options:0 context:NULL];
+    
+}
+
+- (void)resetLevel {
+    [self nextAttempt];
+    
     for (Penguin *penguin in _penguins) {
         [_physicsNode removeChild:penguin];
     }
     _penguins = [[NSMutableArray alloc] init];
-    [_levelNode addChild:level];
-    [_currentLevel addObserver:self forKeyPath:@"numSeals" options:0 context:NULL];
 }
 
 - (void)update:(CCTime)delta {
@@ -116,9 +137,11 @@ static const float MIN_SPEED = 5.f;
 
 - (NSArray *)getLevels {
     Level *level1 = [[Level alloc] initWithLevelName:@"Level1" numSeals:1];
-    Level *level2 = [[Level alloc] initWithLevelName:@"Level2" numSeals:1];
-    Level *level3 = [[Level alloc] initWithLevelName:@"Level3" numSeals:1];
-    return @[level1, level3, level2];
+    Level *level2 = [[Level alloc] initWithLevelName:@"Level2" numSeals:8];
+    Level *level3 = [[Level alloc] initWithLevelName:@"Level3" numSeals:12];
+    Level *level4 = [[Level alloc] initWithLevelName:@"Level3" numSeals:8];
+    Level *level5 = [[Level alloc] initWithLevelName:@"Level3" numSeals:7];
+    return @[level1, level2, level3, level4, level5];
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair seal:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
@@ -191,7 +214,8 @@ static const float MIN_SPEED = 5.f;
 
 - (void)nextAttempt {
     _currentPenguin = nil;
-    [_contentNode stopAction:_followPenguin];
+//    [_contentNode stopAction:_followPenguin];
+    [_contentNode stopAllActions];
     
     CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:1.0f position:_resetNode.position];
     
@@ -199,7 +223,9 @@ static const float MIN_SPEED = 5.f;
 }
 
 -(void) retry {
-    [[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"Gameplay"]];
+//    [[CCDirector sharedDirector] replaceScene:[CCBReader loadAsScene:@"Gameplay"]];
+    [self resetLevel];
+    [self loadLevel];
 }
 
 @end

@@ -40,6 +40,7 @@
 		C901B4E41906C5AD00CAF4F9 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = C901B4E31906C5AD00CAF4F9 /* Gameplay.m */; };
 		C901B4E719073D5300CAF4F9 /* WaitingPenguin.m in Sources */ = {isa = PBXBuildFile; fileRef = C901B4E619073D5300CAF4F9 /* WaitingPenguin.m */; };
 		C9187201190D6A9F00F4A68A /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = C9187200190D6A9F00F4A68A /* Level.m */; };
+		C92588FA1911BF15009AAD40 /* LevelOverScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C92588F91911BF15009AAD40 /* LevelOverScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		C901B4E619073D5300CAF4F9 /* WaitingPenguin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaitingPenguin.m; path = Source/WaitingPenguin.m; sourceTree = "<group>"; };
 		C91871FF190D6A9F00F4A68A /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		C9187200190D6A9F00F4A68A /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
+		C92588F81911BF15009AAD40 /* LevelOverScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelOverScreen.h; sourceTree = "<group>"; };
+		C92588F91911BF15009AAD40 /* LevelOverScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelOverScreen.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 				C901B4D61906BCAA00CAF4F9 /* Seal.m */,
 				C901B4E21906C5AD00CAF4F9 /* Gameplay.h */,
 				C901B4E31906C5AD00CAF4F9 /* Gameplay.m */,
+				C92588F81911BF15009AAD40 /* LevelOverScreen.h */,
+				C92588F91911BF15009AAD40 /* LevelOverScreen.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				C901B4D71906BCAA00CAF4F9 /* Seal.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				C9187201190D6A9F00F4A68A /* Level.m in Sources */,
+				C92588FA1911BF15009AAD40 /* LevelOverScreen.m in Sources */,
 				C901B4E719073D5300CAF4F9 /* WaitingPenguin.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				C901B4D31906BCA000CAF4F9 /* Penguin.m in Sources */,
