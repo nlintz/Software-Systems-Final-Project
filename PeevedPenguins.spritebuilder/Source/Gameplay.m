@@ -19,6 +19,8 @@
     Level *_currentLevel;
     CCScene *_level;
     NSMutableArray *_penguins;
+    NSInteger sealsKilled;
+    
     
     CCPhysicsNode *_physicsNode;
     CCNode *_catapultArm;
@@ -44,6 +46,7 @@ static const float MIN_SPEED = 5.f;
 -(void) didLoadFromCCB {
     self.userInteractionEnabled = TRUE;
     
+    sealsKilled = 0;
     _currentLevelIndex = 0;
     _levels = [self getLevels];
     _currentLevel = [_levels objectAtIndex:_currentLevelIndex];
@@ -71,7 +74,7 @@ static const float MIN_SPEED = 5.f;
 
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"numSeals"]) {
-        if (_currentLevel.numSeals == 0) {
+        if (_currentLevel.numSeals == sealsKilled) {
             [self nextLevel];
         }
     }
@@ -104,6 +107,8 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (void)resetLevel {
+    sealsKilled = 0;
+
     [self nextAttempt];
     
     for (Penguin *penguin in _penguins) {
@@ -136,7 +141,7 @@ static const float MIN_SPEED = 5.f;
 }
 
 - (NSArray *)getLevels {
-    Level *level1 = [[Level alloc] initWithLevelName:@"Level1" numSeals:1];
+    Level *level1 = [[Level alloc] initWithLevelName:@"Level1" numSeals:5];
     Level *level2 = [[Level alloc] initWithLevelName:@"Level2" numSeals:8];
     Level *level3 = [[Level alloc] initWithLevelName:@"Level3" numSeals:12];
     Level *level4 = [[Level alloc] initWithLevelName:@"Level3" numSeals:8];
@@ -158,7 +163,10 @@ static const float MIN_SPEED = 5.f;
     if ([(Seal *)seal alive]) {
         Seal *currentSeal = (Seal *)seal;
         currentSeal.alive = NO;
-        _currentLevel.numSeals -= 1;
+        sealsKilled += 1;
+        if (_currentLevel.numSeals == sealsKilled) {
+            [self nextLevel];
+        }
     }
     CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"SealExplosion"];
     explosion.autoRemoveOnFinish = TRUE;
