@@ -143,9 +143,9 @@ static const float MIN_SPEED = 5.f;
 - (NSArray *)getLevels {
     Level *level1 = [[Level alloc] initWithLevelName:@"Level1" numSeals:5];
     Level *level2 = [[Level alloc] initWithLevelName:@"Level2" numSeals:8];
-    Level *level3 = [[Level alloc] initWithLevelName:@"Level3" numSeals:12];
-    Level *level4 = [[Level alloc] initWithLevelName:@"Level3" numSeals:8];
-    Level *level5 = [[Level alloc] initWithLevelName:@"Level3" numSeals:7];
+    Level *level3 = [[Level alloc] initWithLevelName:@"Level3" numSeals:11];
+    Level *level4 = [[Level alloc] initWithLevelName:@"Level4" numSeals:8];
+    Level *level5 = [[Level alloc] initWithLevelName:@"Level5" numSeals:7];
     return @[level1, level2, level3, level4, level5];
 }
 
@@ -164,6 +164,7 @@ static const float MIN_SPEED = 5.f;
         Seal *currentSeal = (Seal *)seal;
         currentSeal.alive = NO;
         sealsKilled += 1;
+        CCLOG(@"%d", sealsKilled);
         if (_currentLevel.numSeals == sealsKilled) {
             [self nextLevel];
         }
